@@ -1,0 +1,8 @@
+
+<% @comments.each do |comment| %>
+<div style="border:1px solid #EEE; padding:5px;margin:5px;">
+    <strong> <%= comment.user.name %></strong>
+    <p> <%= comment.content %> </p>
+</div>
+<% end %>
+<%= render 'comments/form' %>

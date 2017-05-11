@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Lectures</h1>
+
+<table >
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Attachement</th>
+      <th>Course</th>
+       <th>User</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lectures.each do |lecture| %>
+      <tr>
+        <td><%= raw lecture.content %></td>
+        <td><%= link_to 'Download', lecture.attachement.url %></td>
+
+        <td><%= lecture.try(:course).try(:title) %></td>
+        <td><%= lecture.try(:user).try(:name) %></td>
+
+        <td><%= link_to 'Show', lecture %></td>
+        <%  if current_user.is_instructor %>
+        <td><%= link_to 'Edit', edit_lecture_path(lecture) %></td>
+        <td><%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+        <% if current_user %>
+<% unless current_user.lectures.include?(lecture) %>
+<td>
+         <%= link_to 'spam',spam_lecture_path(lecture),method: :put %>
+
+
+</td>
+ <% else %>
+ <td>
+   <%= link_to 'unspam',unspam_lecture_path(lecture),method: :delete %>
+
+ </td>
+
+<% end %>
+
+
+<% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%  if current_user.is_instructor %>
+
+<%= link_to 'New Lecture', new_lecture_path %>
+<% end %>
