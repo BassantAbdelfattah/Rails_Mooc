@@ -11,6 +11,7 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+    @lectures=Lecture.where(Course_id: @course)
   end
 
   # GET /courses/new
@@ -32,17 +33,18 @@ class CoursesController < ApplicationController
       if !current_user.is_instructor
           redirect_to courses_path
       end
-    @course = Course.new(course_params)
-    @course.user_id=current_user.id
-    respond_to do |format|
-      if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
-        format.json { render :show, status: :created, location: @course }
-      else
-        format.html { render :new }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
-      end
-    end
+
+        @course = Course.new(course_params)
+        @course.user_id=current_user.id
+        respond_to do |format|
+          if @course.save
+            format.html { redirect_to @course, notice: 'Course was successfully created.' }
+            format.json { render :show, status: :created, location: @course }
+          else
+            format.html { render :new }
+            format.json { render json: @course.errors, status: :unprocessable_entity }
+          end
+        end
   end
 
   # PATCH/PUT /courses/1
@@ -51,16 +53,18 @@ class CoursesController < ApplicationController
       if !current_user.is_instructor
           redirect_to courses_path
       end
-    @course.user_id=current_user.id
-    respond_to do |format|
-      if @course.update(course_params)
-        format.html { redirect_to @course, notice: 'Course was successfully updated.' }
-        format.json { render :show, status: :ok, location: @course }
-      else
-        format.html { render :edit }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
-      end
-    end
+      if @lecture.user.id==current_user.id
+        @course.user_id=current_user.id
+        respond_to do |format|
+          if @course.update(course_params)
+            format.html { redirect_to @course, notice: 'Course was successfully updated.' }
+            format.json { render :show, status: :ok, location: @course }
+          else
+            format.html { render :edit }
+            format.json { render json: @course.errors, status: :unprocessable_entity }
+          end
+        end
+      end    
   end
 
   # DELETE /courses/1

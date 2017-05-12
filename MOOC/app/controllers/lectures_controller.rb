@@ -28,14 +28,18 @@ class LecturesController < ApplicationController
 
   # GET /lectures/1/edit
   def edit
+      if !current_user.is_instructor
+          redirect_to lectures_path
+      end
+
   end
 
-  def download_file
-    @lecture = Lecture.find(params[:id])
-    send_file(@lecture.attachement.path,
-        :disposition => 'attachment',
-        :url_based_filename => false)
-  end
+  # def download_file
+  #   @lecture = Lecture.find(params[:id])
+  #   send_file(@lecture.attachement.path,
+  #       :disposition => 'attachment',
+  #       :url_based_filename => false)
+  # end
 
   # POST /lectures
   # POST /lectures.json
@@ -64,7 +68,8 @@ class LecturesController < ApplicationController
       if !current_user.is_instructor
           redirect_to lectures_path
       end
-    @lecture.user_id=current_user.id
+
+
     respond_to do |format|
       if @lecture.update(lecture_params)
         format.html { redirect_to @lecture, notice: 'Lecture was successfully updated.' }
@@ -100,14 +105,14 @@ end
 def spam
    current_user.lectures << @lecture
    current_user.save
-   redirect_to lectures_path
+   redirect_to @lecture
 
 end
 
  def unspam
    current_user.lectures.delete(@lecture)
    current_user.save
-   redirect_to lectures_path
+   redirect_to @lecture
  end
 
   private
@@ -116,13 +121,13 @@ end
     def set_lecture
       @lecture = Lecture.find(params[:id])
     end
-    
+
     def load_courses
       @courses=Course.where(user_id: current_user);
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lecture_params
-      params.require(:lecture).permit(:title, :image, :content, :attachement, :course_id)
+      params.require(:lecture).permit(:title, :image, :content, :attachement, :course_id, :user_id)
     end
 end

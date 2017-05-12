@@ -1,53 +1,71 @@
-
-
 <div class="container" style="margin: 0 auto;">
     <p id="notice"><%= notice %></p>
-            <div class="row">
-                <!-- Blog Post -->
-                <div class="col-sm-8">
-                    <div class="blog-post blog-single-post">
-                        <div class="single-post-title">
-                            <center>
-                            <h2><%= @lecture.title %></h2>
-                        </center>
-                        </div>
+    <div class="row">
+        <!-- Blog Post -->
+        <div class="col-sm-8">
+            <div class="blog-post blog-single-post">
+                <div class="single-post-title">
+                    <center>
+                        <h2><%= @lecture.title %></h2>
+                    </center>
+                </div>
 
-                        <div class="single-post-image">
-                            <%= image_tag @lecture.image, :size => "600x400" %>
-                        </div>
-                        <div class="single-post-info">
+                <div class="single-post-image">
+                    <%= image_tag @lecture.image, :size => "600x400" %>
+                </div>
+                <div class="single-post-info">
 
-                            <strong>Created by:</strong><%= @lecture.try(:user).try(:name) %>
-                             <br>
+                    <strong>Created by:</strong><%= @lecture.try(:user).try(:name) %>
+                    <br>
 
-                               <strong>Course:</strong>
-                               <%= @lecture.try(:course).try(:title) %>
-                             <br>
-                            <%= link_to like_lecture_path(@lecture), method: :put do %>
-                              Like
-                              <%= @lecture.get_upvotes.size %>
-                            <% end %>
-                            <%= link_to dislike_lecture_path(@lecture), method: :put do %>
-                              dislike
-                              <%= @lecture.get_downvotes.size %>
-                            <% end %>
+                    <strong>Course:</strong>
+                    <%= @lecture.try(:course).try(:title) %>
+                    <br>
+                    <%= link_to like_lecture_path(@lecture), method: :put do %>
+                    Like
+                    <%= @lecture.get_upvotes.size %>
+                    <% end %>
+                    <%= link_to dislike_lecture_path(@lecture), method: :put do %>
+                    dislike
+                    <%= @lecture.get_downvotes.size %>
+                    <% end %>
+                    <% if current_user %>
+                    <% unless current_user.lectures.include?(@lecture) %>
+                    <td>
+                        <%= link_to 'spam',spam_lecture_path(@lecture),method: :put %>
 
-                        </div>
-                        <div class="single-post-content">
-                              <%=  raw @lecture.content %>
-                              <p>
-                                <strong>Attachement:</strong>
-                                <%= link_to 'Download', @lecture.attachement.url %>
+                    </td>
+                <% else %>
+                    <td>
+                        <%= link_to 'unspam',unspam_lecture_path(@lecture),method: :delete %>
 
-                              </p>
+                    </td>
 
-                        </div>
+                    <% end %>
 
-                        <%= render 'comments/comment' %>
-                        <%= link_to 'Edit', edit_lecture_path(@lecture) %> |
-                        <%= link_to 'Back', lectures_path %>
-                    </div>
+                    <% end %>
 
                 </div>
+                <div class="single-post-content">
+                    <%=  raw @lecture.content %>
+                    <p>
+                        <strong>Attachement:</strong>
+                        <%= link_to 'Download', @lecture.attachement.url %>
+
+                    </p>
+
+                </div>
+
+                <%= render 'comments/comment' %>
+                <% if current_user.is_instructor %>
+                <% if @lecture.user.id==current_user.id %>
+                <%= link_to 'Edit', edit_lecture_path(@lecture) %>|
+                <% end %>
+                <% end %>
+
+                <%= link_to 'Back', lectures_path %>
             </div>
+
         </div>
+    </div>
+</div>

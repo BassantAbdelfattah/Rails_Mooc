@@ -1,56 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+    <p id="notice"><%= notice %></p>
+    <div class="row">
+        <center >
+            <h1> Lectures</h1>
+        </center>
+        <br>
 
-<h1>Listing Lectures</h1>
-
-<table >
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>Attachement</th>
-      <th>Course</th>
-       <th>User</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @lectures.each do |lecture| %>
-      <tr>
-        <td><%= raw lecture.content %></td>
-        <td><%= link_to 'Download', lecture.attachement.url %></td>
-
-        <td><%= lecture.try(:course).try(:title) %></td>
-        <td><%= lecture.try(:user).try(:name) %></td>
-
-        <td><%= link_to 'Show', lecture %></td>
-        <%  if current_user.is_instructor %>
-        <td><%= link_to 'Edit', edit_lecture_path(lecture) %></td>
-        <td><%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <% end %>
-        <% if current_user %>
-<% unless current_user.lectures.include?(lecture) %>
-<td>
-         <%= link_to 'spam',spam_lecture_path(lecture),method: :put %>
-
-
-</td>
- <% else %>
- <td>
-   <%= link_to 'unspam',unspam_lecture_path(lecture),method: :delete %>
-
- </td>
-
-<% end %>
-
-
-<% end %>
-      </tr>
+        <% @lectures.each do |lecture| %>
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <%= image_tag lecture.image %>
+                <div class="caption">
+                    <p><%= lecture.title %></p>
+                    <p>
+                        <%= link_to'Show' , lecture,class: "fa fa-eye" %>
+                        <%  if current_user.is_instructor %>
+                        <% if lecture.user.id==current_user.id %>
+                        <%= link_to 'Edit', edit_lecture_path(lecture),class: "fa fa-pencil" %>
+                        <%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-trash-o"  %></td>
+                    <% end %>
+                    <% end %>
+                </p>
+            </div>
+        </div>
+    </div>
     <% end %>
-  </tbody>
-</table>
-
+</div>
 <br>
+
 <%  if current_user.is_instructor %>
 
-<%= link_to 'New Lecture', new_lecture_path %>
+<%= link_to 'New Lecture', new_lecture_path,class: "btn btn-success"  %>
 <% end %>
+</div>
