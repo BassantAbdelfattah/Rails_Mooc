@@ -1,6 +1,7 @@
 class LecturesController < ApplicationController
   before_action :set_lecture, only: [:show, :edit, :update, :destroy, :spam, :unspam]
   before_action :authenticate_user!
+  before_action :load_courses, only: [:new, :create, :update, :edit]
 
   # GET /lectures
   # GET /lectures.json
@@ -114,6 +115,10 @@ end
     # Use callbacks to share common setup or constraints between actions.
     def set_lecture
       @lecture = Lecture.find(params[:id])
+    end
+    
+    def load_courses
+      @courses=Course.where(user_id: current_user);
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
