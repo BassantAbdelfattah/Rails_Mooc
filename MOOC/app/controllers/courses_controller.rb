@@ -25,6 +25,9 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+      if !current_user.is_instructor
+          redirect_to courses_path
+      end
   end
 
   # POST /courses
@@ -64,7 +67,7 @@ class CoursesController < ApplicationController
             format.json { render json: @course.errors, status: :unprocessable_entity }
           end
         end
-      end    
+      end
   end
 
   # DELETE /courses/1

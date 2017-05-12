@@ -16,7 +16,35 @@
        </div>
      </div>
    </div>
+   <section id ="courses" class="section-padding">
+         <div class="container">
+           <div class="row">
+             <div class="header-section text-center">
+               <h2>Recent Lecture</h2>
+               <hr class="bottom-line">
+             </div>
+           </div>
+         </div>
+         <br>
+         <div class="container">
+       <div class="row">
+           <% @lectures.each do |lecture| %>
+           <div class="col-sm-6 col-md-3">
+               <div class="thumbnail">
+                   <%= image_tag lecture.image %>
+                   <div class="caption">
+                          <p><%= lecture.title %></p>
+                       <p>
+                           <%= link_to'Show' , lecture,class: "fa fa-eye" %>
+                       </p>
+                   </div>
+               </div>
+           </div>
 
+         <% end %>
+     </div>
+ </div>
+     </section>
 
 
 
@@ -62,38 +90,3 @@
       </div>
     </section>
     <!--/ Contact-->
-    <!--Footer-->
-    <footer id="footer" class="footer">
-      <div class="container text-center">
-
-      <h3>Start Your Free Course Now!</h3>
-
-      <form class="mc-trial row">
-        <div class="form-group col-md-3 col-md-offset-2 col-sm-4">
-          <div class=" controls">
-            <input name="name" placeholder="Enter Your Name" class="form-control" type="text">
-          </div>
-        </div><!-- End email input -->
-        <div class="form-group col-md-3 col-sm-4">
-          <div class=" controls">
-            <input name="EMAIL" placeholder="Enter Your email" class="form-control" type="email">
-          </div>
-        </div><!-- End email input -->
-        <div class="col-md-2 col-sm-4">
-          <p>
-            <button name="submit" type="submit" class="btn btn-block btn-submit">
-            Submit <i class="fa fa-arrow-right"></i></button>
-          </p>
-        </div>
-      </form><!-- End newsletter-form -->
-      <ul class="social-links">
-        <li><a href="#link"><i class="fa fa-twitter fa-fw"></i></a></li>
-        <li><a href="#link"><i class="fa fa-facebook fa-fw"></i></a></li>
-        <li><a href="#link"><i class="fa fa-google-plus fa-fw"></i></a></li>
-        <li><a href="#link"><i class="fa fa-dribbble fa-fw"></i></a></li>
-        <li><a href="#link"><i class="fa fa-linkedin fa-fw"></i></a></li>
-      </ul>
-        ©2017 Mooc . All rights reserved
-
-      </div>
-    </footer>
