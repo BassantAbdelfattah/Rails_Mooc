@@ -4,9 +4,9 @@ class LecturesControllerTest < ActionController::TestCase
   setup do
     @lecture = lectures(:one)
   end
-  
+
   test "Should like lecture" do
-      get :upvote, id: @lecture
+      put :upvote, id: @lecture
       assert_response :success
   end
 
