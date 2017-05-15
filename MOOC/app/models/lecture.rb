@@ -8,5 +8,6 @@ class Lecture < ActiveRecord::Base
   validates :content , :attachement, :image, :course_id, :title, :presence => true
   validates :title, length: { minimum: 3 , maximum: 20}
   mount_uploader :image, ImageUploader
+  mount_uploader :video, VideoUploader
 
 end

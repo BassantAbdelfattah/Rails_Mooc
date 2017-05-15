@@ -1,4 +1,4 @@
-<div class="container" style="margin: 0 auto;">
+<div class="container">
     <p id="notice"><%= notice %></p>
     <div class="row">
         <!-- Blog Post -->
@@ -49,23 +49,27 @@
                 <div class="single-post-content">
                     <%=  raw @lecture.content %>
                     <p>
+                        <center>
+                            <%= video_tag "#{@lecture.video_url}", :size => "400x250", :controls => true %>
+                        </center>
                         <strong>Attachement:</strong>
                         <%= link_to 'Download', @lecture.attachement.url %>
 
                     </p>
-                        <h2>Comments</h2
+                    <h2>Comments</h2 </div>
+
+                    <%= render 'comments/comment' %>
+                    <% if current_user.is_instructor %>
+                    <% if @lecture.user.id==current_user.id %>
+                    <%= link_to 'Edit', edit_lecture_path(@lecture) %>|
+                    <% end %>
+                    <% end %>
+
+                    <%= link_to 'Back', lectures_path %>
                 </div>
 
-                <%= render 'comments/comment' %>
-                <% if current_user.is_instructor %>
-                <% if @lecture.user.id==current_user.id %>
-                <%= link_to 'Edit', edit_lecture_path(@lecture) %>|
-                <% end %>
-                <% end %>
-
-                <%= link_to 'Back', lectures_path %>
             </div>
-
         </div>
     </div>
 </div>
+<br>

@@ -1,3 +1,4 @@
+<div class="container" style="width:40%; margin-top:60px;">
 <%= form_for(@lecture) do |f| %>
   <% if @lecture.errors.any? %>
     <div id="error_explanation">
@@ -10,29 +11,42 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.cktext_area :content %>
-  </div>
   <div class="input-group">
+  <span class="input-group-addon">Add Title</span>
+      <%= f.text_field :title, autofocus: true,class: "form-control",placeholder: "Title" %>
+  </div>
+  <span class="help-block"></span>
 
-      <%= f.label :image %><br>
-      <%= f.file_field :image %>
+
+  <div class="input-group">
+  <span class="input-group">Add Content:</span>
+      <%= f.cktext_area :content, autofocus: true,class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :attachement %><br>
-    <%= f.file_field :attachement %>
+  <span class="help-block"></span>
+
+  <div class="input-group">
+  <span class="input-group-addon">Add Image</span>
+      <%= f.file_field :image, autofocus: true,class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :course_id %><br>
-    <%= f.collection_select :course_id, @courses, :id, :title %>
+  <span class="help-block"></span>
+
+  <div class="input-group">
+  <span class="input-group-addon">Add Attachment</span>
+      <%= f.file_field :attachement, autofocus: true,class: "form-control" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <span class="help-block"></span>
+  <div class="input-group">
+  <span class="input-group-addon">Add Video</span>
+      <%= f.file_field :video, autofocus: true,class: "form-control" %>
   </div>
+  <span class="help-block"></span>
+  <div class="input-group">
+  <span class="input-group-addon">Add Course</span>
+  <%= f.collection_select :course_id, @courses, :id, :title, autofocus: true,class: "dropdown-menu" %>
+</div>
+  <span class="help-block"></span>
+  <%= f.submit "Add Lecture",class: "btn btn-lg btn-success btn-block log" %>
+
 <% end %>
+</div>
+</div>

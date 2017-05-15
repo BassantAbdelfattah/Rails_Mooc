@@ -1,3 +1,4 @@
+<div class="container" style="width:40%; margin-top:60px;">
 <%= form_for(@course) do |f| %>
   <% if @course.errors.any? %>
     <div id="error_explanation">
@@ -10,13 +11,13 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="input-group">
+  <span class="input-group-addon">Add Title</span>
+      <%= f.text_field :title, autofocus: true,class: "form-control",placeholder: "Title" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <span class="help-block"></span>
+
+<%= f.submit "Add Course",class: "btn btn-lg btn-success btn-block log" %>
 <% end %>
+</div>

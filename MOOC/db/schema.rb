@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170512155441) do
+ActiveRecord::Schema.define(version: 20170515122111) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20170512155441) do
     t.integer  "user_id"
     t.string   "title"
     t.string   "image"
+    t.string   "video"
   end
 
   add_index "lectures", ["course_id"], name: "index_lectures_on_course_id"
