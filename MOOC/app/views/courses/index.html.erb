@@ -17,7 +17,7 @@
 
         <p><%= link_to'Show' , course,class: "fa fa-eye" %>
             <% if current_user.is_instructor %>
-            <% if course.user.id==current_user.id %>
+            <% if course.try(:user).try(:id)==current_user.id %>
 
         <%= link_to 'Edit', edit_course_path(course),class: "fa fa-pencil" %>
         <%= link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-trash-o" %></p>

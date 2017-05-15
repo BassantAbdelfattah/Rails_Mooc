@@ -15,7 +15,7 @@
                     <p>
                         <%= link_to'Show' , lecture,class: "fa fa-eye" %>
                         <%  if current_user.is_instructor %>
-                        <% if lecture.user.id==current_user.id %>
+                        <% if lecture.try(:user).try(:id)==current_user.id %>
                         <%= link_to 'Edit', edit_lecture_path(lecture),class: "fa fa-pencil" %>
                         <%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-trash-o"  %></td>
                     <% end %>

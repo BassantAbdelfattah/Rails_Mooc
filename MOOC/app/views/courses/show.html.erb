@@ -16,7 +16,7 @@
                 <%= image_tag lecture.image %>
                 <div class="caption">
                     <p><%= lecture.title %></p>
-                    
+
                     <p>
                         <%= link_to'Show' , lecture,class: "fa fa-eye" %>
                     </p>
@@ -28,7 +28,7 @@
     </div>
 </div>
 <% if current_user.is_instructor %>
-<% if @course.user.id==current_user.id %>
+<% if @course.try(:user).try(:id)==current_user.id %>
 
 <%= link_to 'Edit', edit_course_path(@course) %>
 |

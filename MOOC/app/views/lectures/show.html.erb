@@ -60,7 +60,7 @@
 
                     <%= render 'comments/comment' %>
                     <% if current_user.is_instructor %>
-                    <% if @lecture.user.id==current_user.id %>
+                    <% if @lecture.try(:user).try(:id)==current_user.id %>
                     <%= link_to 'Edit', edit_lecture_path(@lecture) %>|
                     <% end %>
                     <% end %>

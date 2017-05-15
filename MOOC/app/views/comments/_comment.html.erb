@@ -1,7 +1,7 @@
 
 <% @comments.each do |comment| %>
 <div style="border:1px solid #EEE; padding:5px;margin:5px;">
-    <strong> <%= comment.user.name %></strong>
+    <strong> <%= comment.try(:user).try(:name) %></strong>
     <p> <%= comment.content %> </p>
     <p style="color: gray;"> <%= time_ago_in_words(comment.created_at) %> </p>
 
