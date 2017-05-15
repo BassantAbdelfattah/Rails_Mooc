@@ -5,8 +5,8 @@ class Lecture < ActiveRecord::Base
   has_many :comments
   acts_as_votable
   has_and_belongs_to_many :users
-  validates :content , :presence => true
-  validates :course_id , :presence => true
+  validates :content , :attachement, :image, :course_id, :title, :presence => true
+  validates :title, length: { minimum: 3 , maximum: 20}
   mount_uploader :image, ImageUploader
 
 end

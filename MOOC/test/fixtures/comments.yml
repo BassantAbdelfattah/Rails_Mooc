@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  content: MyText
-  lecture_id: 
-  user_id: 
+comments:
+  content: first commebt
+  lecture_id: 5
+  user_id: 10
 
 two:
   content: MyText
-  lecture_id: 
-  user_id: 
+  lecture_id:
+  user_id:

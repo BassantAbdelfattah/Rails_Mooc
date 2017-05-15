@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
     before_action :find_lecture
 
-
     def create
         @comment=@lecture.comments.create(params[:comment].permit(:content))
         @comment.user_id=current_user.id
@@ -9,7 +8,7 @@ class CommentsController < ApplicationController
         if  @comment.save
             redirect_to @lecture
         else
-            render 'new'
+            redirect_to @lecture
         end
     end
 
