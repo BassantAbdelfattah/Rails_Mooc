@@ -7,6 +7,12 @@ class CourseTest < ActiveSupport::TestCase
   test "should not save course without title" do
   course = Course.new
   assert_not course.save
-end
+  end
+  
+  test "should not save lecture with title greater than 20" do
+  course = Course.new
+  course.title="ruby on rails validation"
+  assert_not course.save
+  end
 
 end
